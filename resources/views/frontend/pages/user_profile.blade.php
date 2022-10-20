@@ -4,10 +4,12 @@
     <section class="banner-area-7 pt-lg-120 pt-90 pb-80 pb-lg-90 user-details-banner">
         <div class="banner-shapes">
             <div class="shape">
-                <img data-parallax='{"x": 50, "y": 0, "rotateZ":0}' src="/img/add-question/banner-shape-1.png" alt="shape" />
+                <img data-parallax='{"x": 50, "y": 0, "rotateZ":0}' src="/img/add-question/banner-shape-1.png"
+                    alt="shape" />
             </div>
             <div class="shape">
-                <img data-parallax='{"x": 50, "y": 0, "rotateZ":0}' src="/img/add-question/banner-shape-2.png" alt="shape" />
+                <img data-parallax='{"x": 50, "y": 0, "rotateZ":0}' src="/img/add-question/banner-shape-2.png"
+                    alt="shape" />
             </div>
             <div class="shape">
                 <img data-parallax='{"x": 50, "y": 0, "rotateZ":0}' src="/img/add-question/banner-shape-3.png"
@@ -21,9 +23,9 @@
         <div class="container">
             <div class="row gy-3 pt-70 align-items-center">
                 <div class="col-lg-8 d-sm-flex flex-lg-row flex-column align-items-center text-center text-sm-start">
-                    <img class="rounded-circle" src="/img/user_details/user-img.png" alt="">
+                    <img class="rounded-circle" src="/images/profile/{{ auth()->user()->userMeta->image }}"height="100" width="100" alt="">
                     <div class="user-info ml-lg-60 ms-sm-5 mt-4 mt-lg-0">
-                        <h3>{{auth()->user()->name}}</h3>
+                        <h3>{{ auth()->user()->name }}</h3>
                         <ul class="list-unstyled mb-4">
                             <li>Web Developer</li>
                             <li>Boston, MA, United States</li>
@@ -77,10 +79,7 @@
                                     <h6><img src="/img/user_details/envelope.png" alt=""> Email</h6>
                                     <p><a href="mailto:gustavo@ama.com">gustavo@ama.com</a></p>
                                 </div>
-                                <div class="col-md-4">
-                                    <h6><img src="/img/user_details/link.png" alt=""> Visit site</h6>
-                                    <p> <a href="https://www.ama.com/">www.ama.com</a></p>
-                                </div>
+
 
                             </div>
                         </div>
