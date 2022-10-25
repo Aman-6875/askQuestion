@@ -23,7 +23,9 @@
         <div class="container">
             <div class="row gy-3 pt-70 align-items-center">
                 <div class="col-lg-8 d-sm-flex flex-lg-row flex-column align-items-center text-center text-sm-start">
-                    <img class="rounded-circle" src="/images/profile/{{ auth()->user()->userMeta->image }}"height="100" width="100" alt="">
+                    <img class="rounded-circle"
+                        src="/images/profile/{{ auth()->user()->userMeta->image ?? null }}"height="100" width="100"
+                        alt="">
                     <div class="user-info ml-lg-60 ms-sm-5 mt-4 mt-lg-0">
                         <h3>{{ auth()->user()->name }}</h3>
                         <ul class="list-unstyled mb-4">

@@ -79,10 +79,10 @@ class FrontendController extends Controller
             User::where('id', Auth::user()->id)->update($userData);
             $userMeta = UserMeta::where('user_id', Auth::user()->id)->first();
             if ($userMeta) {
-                UserMeta::where('user_id', Auth::user()->id)->update($request->except(['name', 'email', 'password']));
+                UserMeta::where('user_id', Auth::user()->id)->update($request->except(['name', 'email', 'password', 'file']));
             } else {
                 $request['user_id'] = Auth::user()->id;
-                UserMeta::create($request->except(['name', 'email', 'password']));
+                UserMeta::create($request->except(['name', 'email', 'password', 'file']));
             }
         }
 

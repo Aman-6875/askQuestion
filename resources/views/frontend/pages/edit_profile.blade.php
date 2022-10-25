@@ -134,7 +134,7 @@
 
                                 <div class="mt-25">
                                     <label class="label" for="inp_desc">Bio <span>*</span></label>
-                                    <textarea id="inp_desc" cols="30" rows="7" class="form-control" name="description"></textarea>
+                                    <textarea id="inp_desc" cols="30" rows="7" class="form-control" name="bio"></textarea>
                                 </div>
 
                                 <div class="mt-30">
