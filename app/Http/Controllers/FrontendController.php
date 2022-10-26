@@ -29,7 +29,9 @@ class FrontendController extends Controller
     }
     public function userProfile()
     {
-        return view('frontend.pages.user_profile');
+        $user_id = Auth::user()->id;
+        $questions_count = Question::where('user_id',$user_id)->count();
+        return view('frontend.pages.user_profile',compact('questions_count'));
     }
 
     public function editProfile()
@@ -135,4 +137,16 @@ class FrontendController extends Controller
         Comment::create($data);
         return back();
     }
+
+
+
+    public function userPosts()
+    {
+        $user_id = Auth::user()->id;
+        $questions = Question::where('user_id',$user_id)->get();
+        return view('frontend.pages.user_posts',compact('questions'));
+    }
+
+
+
 }

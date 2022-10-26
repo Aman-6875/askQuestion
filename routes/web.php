@@ -35,5 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-profile', [FrontendController::class, 'userProfile']);
     Route::post('/update-profile', [FrontendController::class, 'updateUserProfile']);
     Route::get('/ask-question', [FrontendController::class, 'questionForm']);
-    Route::post('/store-question', [FrontendController::class, 'storeQuestion']);
+    Route::post('/store-question', [FrontendController::class, 'storeQuestion']); 
+
+    Route::get('/user-posts', [FrontendController::class, 'userPosts'])->name('user.posts');
 });

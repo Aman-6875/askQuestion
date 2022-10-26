@@ -93,11 +93,12 @@
                                     <img src="/img/user_details/help-button.png" alt="">
                                 </div>
                                 <div>
-                                    <p>Questions</p>
-                                    <h5 class="counter">15</h5>
+                                    <p><a href="{{ route('user.posts') }}">Posts</a></p>
+                                    <h5 class="counter">{{$questions_count}}</h5>
                                 </div>
                             </div>
                         </div>
+                         
                         <div class="col-xl-3 col-md-6">
                             <div class="qna-statistics">
                                 <div>
@@ -119,7 +120,7 @@
                                     <h5 class="counter">299</h5>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                         <div class="col-xl-3 col-md-6">
                             <div class="qna-statistics">
                                 <div>
