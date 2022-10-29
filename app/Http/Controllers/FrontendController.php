@@ -95,7 +95,7 @@ class FrontendController extends Controller
         // return $request->all();
         if ($request->hasFile('file')) {
             $image = $request->file('file');
-            $image_name = time() . '.' . 'file' . $image->getClientOriginalExtension();
+            $image_name = time() . '.' . 'file' . $image->getClientOriginalName();
             $destinationPath = public_path('/images/questions');
             $image->move($destinationPath, $image_name);
             $request['image'] = $image_name;
@@ -147,6 +147,64 @@ class FrontendController extends Controller
         return view('frontend.pages.user_posts',compact('questions'));
     }
 
+
+
+    public function questionEdit($id){
+
+        $question = Question::findOrFail($id);
+
+        if ($question) {
+            return view('frontend.pages.edit_question',compact('question'));
+        }
+    }
+
+    public function questionUpdate(Request $request, $id){
+
+          
+        if ($request->hasFile('file')) {
+            $image = $request->file('file');
+            $image_name = time() . '.' . 'file' . $image->getClientOriginalName();
+            $destinationPath = public_path('/images/questions/');
+            $image->move($destinationPath, $image_name);
+            $request['image'] = "/images/questions/".$image_name;
+        }
+
+
+        if ($request->has('file')) {
+            $data = [
+                'title' => $request->title,
+                'category_id' => $request->category_id,
+                'tags' => $request->tags,
+                'user_id' => Auth::user()->id,
+                'description' => $request->description,
+                'file' => $request['image']
+            ];
+        } else {
+            $data = [
+                'title' => $request->title,
+                'category_id' => $request->category_id,
+                'tags' => $request->tags,
+                'user_id' => Auth::user()->id,
+                'description' => $request->description,
+            ];
+        }
+
+        Question::where('id',$id)->update($data); 
+        return redirect()->back();
+    }
+
+
+
+    
+    public function questionDelete($id){
+
+        $question = Question::findOrFail($id);
+
+        if ($question) {
+            $question->delete();
+            return redirect()->back();
+        }
+    }
 
 
 }
