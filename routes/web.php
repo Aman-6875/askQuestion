@@ -42,4 +42,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/question-edit/{id}', [FrontendController::class, 'questionEdit'])->name('question.edit');
     Route::post('/question-edit/{id}', [FrontendController::class, 'questionUpdate'])->name('question.update');
     Route::get('/question-delete/{id}', [FrontendController::class, 'questionDelete'])->name('question.delete');
+    Route::get('/question-best-answer/{cid}/{qid}', [FrontendController::class, 'questionBestAnswer'])->name('question_best.answer');
 });

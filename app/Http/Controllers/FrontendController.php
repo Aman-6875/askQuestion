@@ -21,7 +21,9 @@ class FrontendController extends Controller
     public function singleQuestion($id)
     {
         $question = Question::where('id', $id)->with('comments')->first();
-        return view('frontend.pages.question_details')->with('question', $question);
+        $best_comment_doesnt_exist = Comment::where('question_id',$question->id)->where('is_accept',1)->doesntExist();
+        $accepted_solution = Comment::where('question_id',$question->id)->where('is_accept',1)->first();
+        return view('frontend.pages.question_details',compact('best_comment_doesnt_exist','accepted_solution'))->with('question', $question);
     }
     public function questionForm()
     {
@@ -204,6 +206,21 @@ class FrontendController extends Controller
             $question->delete();
             return redirect()->back();
         }
+    }
+
+
+
+    public function questionBestAnswer($cid,$qid){
+        
+       $best_comment_doesnt_exist = Comment::where('question_id',$qid)->where('is_accept',1)->doesntExist();
+
+      if ($best_comment_doesnt_exist) {
+         Comment::findOrFail($cid)->update(['is_accept' => 1]);
+         return redirect()->back();
+      } else {
+
+      }
+      
     }
 
 

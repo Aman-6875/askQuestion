@@ -80,6 +80,7 @@
                     </div>
 
                     <!-- Best answer -->
+                    @if (!empty($accepted_solution))
                     <div class="best-answer">
                         <div class="row">
                             <div class="col-lg-9">
@@ -88,7 +89,7 @@
                                         <img src="/img/forum/author-avatar.png" alt="">
                                     </a>
                                     <div class="forum-post-author">
-                                        <a class="author-name" href="#"> Eh Jewel </a>
+                                        <a class="author-name" href="#">{{$accepted_solution->user->name}}</a>
                                         <div class="forum-author-meta">
                                             <div class="author-badge">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +102,7 @@
                                             </div>
                                             <div class="author-badge">
                                                 <i class="icon_calendar"></i>
-                                                <a href="#">January 16 at 10:32 PM</a>
+                                                <a href="#">{{$accepted_solution->created_at}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -116,18 +117,12 @@
                         <div class="best-ans-content d-flex">
                             <span class="question-icon" title="The Best Answer">A:</span>
                             <p>
-                                Hi,
-                                You can edit the service pages with Elementor. To enable Elementor on Service post
-                                type, follow the bellow steps<br>
-                                Step 1 - Navigate to your website's WordPress Dashbord>Elementor>Settings<br>
-                                Step 2 - Tick the post you went to edit with Elementor in the post typs section and
-                                click the save<br>
-                                changes button<br>
-                                Step 3 - Now you can click edit with Elementor button and start working<br><br>
-                                Thanks!
+                                {{$accepted_solution->comment}}
                             </p>
                         </div>
                     </div>
+                    @endif
+                    
 
                     <!-- All answer -->
                     <div class="all-answers">
@@ -159,9 +154,9 @@
                             <div class="comment-content">
                                 <p>{{$comment->comment}}</p>
                                 <div class="action-button-container action-btns">
-                                    
-                                    @if(auth()->check() && auth()->user()->id == $question->user->id)
-                                    <a href="#" class="action_btn btn-ans ask-btn reply-btn">Accept Best Answer</a>
+                                     
+                                    @if(auth()->check() && auth()->user()->id == $question->user->id && $best_comment_doesnt_exist)
+                                    <a href="{{ route('question_best.answer',[$comment->id,$question->id]) }}" class="action_btn btn-ans ask-btn reply-btn">Accept Best Answer</a>
                                     @endif
                                     <a href="#" class="action_btn btn-ans ask-btn too-btn">Helpful</a>
                                 </div>
