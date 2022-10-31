@@ -74,10 +74,9 @@
                                 <br>
                                 <a href="#" class="btn btn-danger cancelbutton">Cancel</a>
                                 <button class="btn btn-primary">Submit</button><br/><br/>
-                            </form>
-                           
+                            </form> 
                         </div>
-                    </div>
+                    </div> 
 
                     <!-- Best answer -->
                     @if (!empty($accepted_solution))
@@ -154,11 +153,18 @@
                             <div class="comment-content">
                                 <p>{{$comment->comment}}</p>
                                 <div class="action-button-container action-btns">
+                                    @if (!empty($message))
+                                    @dd($message)
+                                    @endif
                                      
                                     @if(auth()->check() && auth()->user()->id == $question->user->id && $best_comment_doesnt_exist)
                                     <a href="{{ route('question_best.answer',[$comment->id,$question->id]) }}" class="action_btn btn-ans ask-btn reply-btn">Accept Best Answer</a>
                                     @endif
-                                    <a href="#" class="action_btn btn-ans ask-btn too-btn">Helpful</a>
+                                    
+                                    @if(auth()->check() && auth()->user()->id == $comment->user_id )
+                                    <a href="{{ route('question.helpful',[$comment->id,$question->id]) }}" class="action_btn btn-ans ask-btn too-btn">Helpful({{count($comment->helpful_count)}})</a>
+                                    @endif
+                                    
                                 </div>
                             </div>
                         </div>

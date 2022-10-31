@@ -17,4 +17,8 @@ class Comment extends Model
     public function question(){
         return $this->belongsTo(Question::class,'question_id')->withDefault();
     }
+
+    public function helpful_count(){
+        return $this->hasMany(CommentHelpfulInfo::class,'comment_id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\CommentHelpfulInfo;
 use App\Models\Question;
 use App\Models\User;
 use App\Models\UserMeta;
@@ -215,10 +216,31 @@ class FrontendController extends Controller
        $best_comment_doesnt_exist = Comment::where('question_id',$qid)->where('is_accept',1)->doesntExist();
 
       if ($best_comment_doesnt_exist) {
-         Comment::findOrFail($cid)->update(['is_accept' => 1]);
+         $comment = Comment::findOrFail($cid)->first();
+         $comment->update(['is_accept' => 1]);
+         User::where('id', $comment->user_id)->increment('points',5);
          return redirect()->back();
       } else {
 
+      }
+      
+    }
+
+
+    public function questionHelpful($cid,$qid){  
+  
+       $checking_exist_helpful = CommentHelpfulInfo::where('comment_id',$cid)->where('question_id',$qid)->exists(); 
+      if ($checking_exist_helpful == false) { 
+        
+        CommentHelpfulInfo::create([
+            'user_id' => Auth::user()->id,
+            'question_id' => $qid,
+            'comment_id' => $cid,
+        ]);
+         User::where('id', Auth::user()->id)->increment('points');
+         return redirect()->back();
+      } else {
+        return redirect()->back()->with('message','you already voted as helpful');
       }
       
     }
