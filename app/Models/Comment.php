@@ -21,4 +21,6 @@ class Comment extends Model
     public function helpful_count(){
         return $this->hasMany(CommentHelpfulInfo::class,'comment_id');
     }
+
+   
 }

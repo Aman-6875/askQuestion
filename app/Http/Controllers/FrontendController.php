@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\CommentHelpfulInfo;
 use App\Models\Question;
+use App\Models\QuestionTooInfo;
 use App\Models\User;
 use App\Models\UserMeta;
 use Illuminate\Http\Request;
@@ -24,7 +25,8 @@ class FrontendController extends Controller
         $question = Question::where('id', $id)->with('comments')->first();
         $best_comment_doesnt_exist = Comment::where('question_id',$question->id)->where('is_accept',1)->doesntExist();
         $accepted_solution = Comment::where('question_id',$question->id)->where('is_accept',1)->first();
-        return view('frontend.pages.question_details',compact('best_comment_doesnt_exist','accepted_solution'))->with('question', $question);
+        $question_too_count = QuestionTooInfo::where('question_id',$id)->count();
+        return view('frontend.pages.question_details',compact('best_comment_doesnt_exist','accepted_solution','question_too_count'))->with('question', $question);
     }
     public function questionForm()
     {
@@ -241,6 +243,27 @@ class FrontendController extends Controller
          return redirect()->back();
       } else {
         return redirect()->back()->with('message','you already voted as helpful');
+      }
+      
+    }
+
+
+    public function questionToo($qid){  
+       
+       $checking_exist_too = QuestionTooInfo::where('question_id',$qid)->where('user_id',Auth::user()->id)->exists(); 
+     
+      if ($checking_exist_too == false) { 
+        
+        QuestionTooInfo::create([
+            'user_id' => Auth::user()->id,
+            'question_id' => $qid
+        ]);
+
+        $question_user_id = Question::where('id',$qid)->pluck('user_id')->first(); 
+         User::where('id', $question_user_id)->increment('points',2);
+         return redirect()->back();
+      } else {
+        return redirect()->back()->with('message','you already voted');
       }
       
     }
