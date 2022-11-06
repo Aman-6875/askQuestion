@@ -44,7 +44,7 @@ class FrontendController extends Controller
     {
         // return $request->all();
         unset($request['_token']);
-
+        //he;;p
         if ($request->hasFile('file')) {
             $image = $request->file('file');
             $image_name = time() . '.' . 'file' . $image->getClientOriginalExtension();
