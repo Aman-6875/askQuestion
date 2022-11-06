@@ -22,7 +22,7 @@ Route::get('/sign-up', [AuthController::class, 'registerForm']);
 
 Route::get('/', [FrontendController::class, 'index']);
 Route::post('/post-register', [AuthController::class, 'postRegister'])->name('auth.signup');
-Route::get('/question-details/{id}', [FrontendController::class, 'singleQuestion']);
+Route::get('/question-details/{id}', [FrontendController::class, 'singleQuestion'])->name('question.details');
 Route::post('/post-login', [AuthController::class, 'authenticate'])->name('auth.signin');
 
 Route::middleware('auth')->group(function () {
@@ -37,5 +37,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/ask-question', [FrontendController::class, 'questionForm']);
     Route::post('/store-question', [FrontendController::class, 'storeQuestion']); 
 
+    //User Profile Section
     Route::get('/user-posts', [FrontendController::class, 'userPosts'])->name('user.posts');
+    Route::get('/question-edit/{id}', [FrontendController::class, 'questionEdit'])->name('question.edit');
+    Route::post('/question-edit/{id}', [FrontendController::class, 'questionUpdate'])->name('question.update');
+    Route::get('/question-delete/{id}', [FrontendController::class, 'questionDelete'])->name('question.delete');
+    Route::get('/question-best-answer/{cid}/{qid}', [FrontendController::class, 'questionBestAnswer'])->name('question_best.answer');
+    Route::get('/question-helpful/{cid}/{qid}', [FrontendController::class, 'questionHelpful'])->name('question.helpful');
 });
