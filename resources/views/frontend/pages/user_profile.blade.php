@@ -30,21 +30,17 @@
                         <h3>{{ auth()->user()->name }}</h3>
                         @if (auth()->user()->points >= 100)
                             <span class="badge badge-pill badge-primary">Diamond</span>
-
-                            @elseif(auth()->user()->points >= 80 && auth()->user()->points <=99)
+                        @elseif(auth()->user()->points >= 80 && auth()->user()->points <= 99)
                             <span class="badge badge-pill badge-primary">Gold</span>
-
-                            @elseif(auth()->user()->points >= 60 && auth()->user()->points <=79)
+                        @elseif(auth()->user()->points >= 60 && auth()->user()->points <= 79)
                             <span class="badge badge-pill badge-primary">Silver</span>
-
-                            @elseif(auth()->user()->points >= 1 && auth()->user()->points <=59)
+                        @elseif(auth()->user()->points >= 1 && auth()->user()->points <= 59)
                             <span class="badge badge-pill badge-primary">Bronze</span>
                         @else
-                            
                         @endif
-                        
-                        
-  
+
+
+
                         <ul class="list-unstyled mb-4">
                             <li>Web Developer</li>
                             <li>Boston, MA, United States</li>
@@ -111,11 +107,11 @@
                                 </div>
                                 <div>
                                     <p><a href="{{ route('user.posts') }}">Posts</a></p>
-                                    <h5 class="counter">{{$questions_count}}</h5>
+                                    <h5 class="counter">{{ $questions_count ?? null }}</h5>
                                 </div>
                             </div>
                         </div>
-                         
+
                         <div class="col-xl-3 col-md-6">
                             <div class="qna-statistics">
                                 <div>
@@ -137,7 +133,7 @@
                                     <h5 class="counter">299</h5>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="qna-statistics">
                                 <div>
