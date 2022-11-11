@@ -33,6 +33,7 @@ class CreateCommentHelpfulInfosTable extends Migration
      *
      * @return void
      */
+    
     public function down()
     {
         Schema::dropIfExists('comment_helpful_infos');
