@@ -62,7 +62,10 @@
                         <div class="action-button-container action-btns">
                             {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> --}}
                             <a href="#" class="action_btn btn-ans ask-btn reply-btn replybutton">Reply</a>
-                            <a href="#" class="action_btn btn-ans ask-btn too-btn">I have this question too (20)</a>
+                            @if(auth()->check())
+                                    <a href="{{ route('question.too',$question->id) }}" class="action_btn btn-ans ask-btn too-btn">I have this question too ({{$question_too_count}})</a>
+                           @endif
+                           
                         </div>
                         <br>
                         <div class="replybox" id="panel1" style="display:none">

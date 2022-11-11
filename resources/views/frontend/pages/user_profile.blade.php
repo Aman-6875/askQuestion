@@ -28,6 +28,23 @@
                         alt="">
                     <div class="user-info ml-lg-60 ms-sm-5 mt-4 mt-lg-0">
                         <h3>{{ auth()->user()->name }}</h3>
+                        @if (auth()->user()->points >= 100)
+                            <span class="badge badge-pill badge-primary">Diamond</span>
+
+                            @elseif(auth()->user()->points >= 80 && auth()->user()->points <=99)
+                            <span class="badge badge-pill badge-primary">Gold</span>
+
+                            @elseif(auth()->user()->points >= 60 && auth()->user()->points <=79)
+                            <span class="badge badge-pill badge-primary">Silver</span>
+
+                            @elseif(auth()->user()->points >= 1 && auth()->user()->points <=59)
+                            <span class="badge badge-pill badge-primary">Bronze</span>
+                        @else
+                            
+                        @endif
+                        
+                        
+  
                         <ul class="list-unstyled mb-4">
                             <li>Web Developer</li>
                             <li>Boston, MA, United States</li>
@@ -128,7 +145,7 @@
                                 </div>
                                 <div>
                                     <p>Points</p>
-                                    <h5 class="counter">5</h5>
+                                    <h5 class="counter">{{ auth()->user()->points }}</h5>
                                 </div>
                             </div>
                         </div>
