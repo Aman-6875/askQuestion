@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-profile', [FrontendController::class, 'userProfile']);
     Route::post('/update-profile', [FrontendController::class, 'updateUserProfile']);
     Route::get('/ask-question', [FrontendController::class, 'questionForm']);
-    Route::post('/store-question', [FrontendController::class, 'storeQuestion']); 
+    Route::post('/store-question', [FrontendController::class, 'storeQuestion']);
 
     //User Profile Section
     Route::get('/user-posts', [FrontendController::class, 'userPosts'])->name('user.posts');
@@ -46,3 +48,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/question-helpful/{cid}/{qid}', [FrontendController::class, 'questionHelpful'])->name('question.helpful');
     Route::get('/question-too/{qid}', [FrontendController::class, 'questionToo'])->name('question.too');
 });
+
+Route::get('admin-dashboard', [AdminController::class, 'index']);
+Route::resource('category', CategoryController::class);
