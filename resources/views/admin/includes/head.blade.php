@@ -32,7 +32,9 @@
 
     <script src="/admin_assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
     <script src="/admin_assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-
+    <link href="/admin_assets/plugins/datatables/css/jquery.datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="/admin_assets/plugins/datatables/css/jquery.datatables_themeroller.css" rel="stylesheet"
+        type="text/css" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
