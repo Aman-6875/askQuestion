@@ -1,48 +1,18 @@
 @extends('admin.layout')
 @section('content')
     <div class="page-title">
-        <h3>Category</h3>
+        <h3>Questions</h3>
         <div class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li><a href="/admin-dashboard">Home</a></li>
-                <li class="active">Category</li>
+                <li class="active">Questions</li>
             </ol>
         </div>
     </div>
     <div id="main-wrapper">
         <div class="panel panel-white">
-            <div class="panel-heading">
-                <h4 class="panel-title">Add rows</h4>
-            </div>
             <div class="panel-body">
-                <button type="button" class="btn btn-success m-b-sm" data-toggle="modal" data-target="#myModal">Add New
-                    Row</button>
-                <!-- Modal -->
-                <form id="add-row-form" action="{{ route('category.store') }}" method="POST">
-                    @csrf
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                        aria-hidden="true" style="display: none;">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                            aria-hidden="true">×</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <input type="text" id="name-input" class="form-control" placeholder="Name"
-                                            required="" name="name">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button type="submit" id="add-row" class="btn btn-success">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+
                 <div class="table-responsive">
                     <div id="example3_wrapper" class="dataTables_wrapper">
                         <table id="datatable" class="display table dataTable" style="width: 100%;" role="grid"
