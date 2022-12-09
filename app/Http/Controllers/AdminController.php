@@ -20,8 +20,13 @@ class AdminController extends Controller
     }
     public function allQuestions()
     {
-        return  $questions = Question::with('user')->get();
+        $questions = Question::with('user', 'category', 'comments')->get();
 
-        return view('admin.pages.comment.index');
+        return view('admin.pages.questions.index')->with('questions', $questions);
+    }
+    public function deleteQuestion($id)
+    {
+        Question::where('id', $id)->delete();
+        return back();
     }
 }

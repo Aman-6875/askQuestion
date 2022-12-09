@@ -21,7 +21,20 @@
                                 <tr role="row">
                                     <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1"
                                         colspan="1" aria-sort="ascending"
-                                        aria-label="Name: activate to sort column descending" style="width: 161px;">Name
+                                        aria-label="Name: activate to sort column descending" style="width: 161px;">Title
+                                    </th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1"
+                                        colspan="1" aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending" style="width: 161px;">Category
+                                    </th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1"
+                                        colspan="1" aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending" style="width: 161px;">User
+                                    </th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1"
+                                        colspan="1" aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending" style="width: 161px;">Total
+                                        Comments
                                     </th>
 
                                     <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
@@ -30,16 +43,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($categories as $item)
+
+                                @forelse ($questions as $item)
                                     <tr role="row" class="odd">
                                         <td class="sorting_1"><a href="javascript:void(0);"
-                                                class="editable editable-click">{{ $item->name }}</a></td>
+                                                class="editable editable-click">{{ $item->title }}</a>
+                                        </td>
+                                        <td class="sorting_1"><a href="javascript:void(0);"
+                                                class="editable editable-click">{{ $item->category->name }}</a>
+                                        </td>
+                                        <td class="sorting_1"><a href="javascript:void(0);"
+                                                class="editable editable-click">{{ $item->user->name }}</a>
+                                        </td>
+                                        <td class="sorting_1"><a href="javascript:void(0);"
+                                                class="editable editable-click">{{ count($item->comments) }}</a>
+                                        </td>
                                         <td>
-                                            <a type="button" class="btn btn-primary m-b-sm"
-                                                href="{{ route('category.edit', $item->id) }}"
-                                                class="editable editable-click">Edit</a>
                                             <a type="button" class="btn btn-danger m-b-sm"
-                                                href="{{ route('category.delete', $item->id) }}"
+                                                href="{{ route('question.delete', $item->id) }}"
                                                 class="editable editable-click">Delete</a>
                                         </td>
                                     </tr>

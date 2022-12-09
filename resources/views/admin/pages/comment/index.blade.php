@@ -30,7 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($categories as $item)
+                                @forelse ($questions as $item)
                                     <tr role="row" class="odd">
                                         <td class="sorting_1"><a href="javascript:void(0);"
                                                 class="editable editable-click">{{ $item->name }}</a></td>
