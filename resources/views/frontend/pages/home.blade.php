@@ -168,17 +168,17 @@
                                 <div class="col-4 text-center py-4">
                                     <img src="/img/speech-bubble.png" alt="">
                                     <p>Topics</p>
-                                    <h5>50</h5>
+                                    <h5>{{ $data['cat_count'] }}</h5>
                                 </div>
                                 <div class="col-4 text-center py-4 border-end border-start">
                                     <img src="/img/writing.png" alt="">
                                     <p>Posts</p>
-                                    <h5>350</h5>
+                                    <h5>{{ $data['post_count'] }}</h5>
                                 </div>
                                 <div class="col-4 text-center py-4">
                                     <img src="/img/user-icon.png" alt="">
                                     <p>Users</p>
-                                    <h5>599</h5>
+                                    <h5>{{ $data['user_count'] }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -189,70 +189,26 @@
                                 <h5>Popular Topics</h5>
                             </div>
                             <div class="widget-content">
+                                @foreach ($data['popular_topics'] as $item)
                                 <div class="single-topic">
-                                    <span class="topic-no">01</span>
+                                    <span class="topic-no">{{  $loop->index + 1 }}</span>
                                     <div class="topic-content">
-                                        <h6><a href="forum-single.html">Cannot reset my password</a></h6>
+                                        <h6><a href="{{ route('question.details',$item->id) }}">{{  $item->title }}</a></h6>
                                         <div class="topic-info">
                                             <div>
                                                 <img src="/img/forum/topic-user-outline.svg" alt="">
-                                                <span>Zain Siphron</span>
+                                                <span>{{$item->user->name}}</span>
                                             </div>
                                             <div>
                                                 <img src="/img/forum/topic-calendar-outline.png" alt="">
-                                                <span>Apr 15, 2021</span>
+                                                <span>{{ $item->created_at->diffForHumans() }}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="single-topic">
-                                    <span class="topic-no">02</span>
-                                    <div class="topic-content">
-                                        <h6><a href="forum-single.html">How can I cancel my subscription?</a></h6>
-                                        <div class="topic-info">
-                                            <div>
-                                                <img src="/img/forum/topic-user-outline.svg" alt="">
-                                                <span>Zain Siphron</span>
-                                            </div>
-                                            <div>
-                                                <img src="/img/forum/topic-calendar-outline.png" alt="">
-                                                <span>Apr 15, 2021</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="single-topic">
-                                    <span class="topic-no">03</span>
-                                    <div class="topic-content">
-                                        <h6><a href="forum-single.html">Ama a drag-and-drop interaction</a></h6>
-                                        <div class="topic-info">
-                                            <div>
-                                                <img src="/img/forum/topic-user-outline.svg" alt="">
-                                                <span>Zain Siphron</span>
-                                            </div>
-                                            <div>
-                                                <img src="/img/forum/topic-calendar-outline.png" alt="">
-                                                <span>Apr 15, 2021</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="single-topic">
-                                    <span class="topic-no">04</span>
-                                    <div class="topic-content">
-                                        <h6><a href="forum-single.html">Can we use API in WordPress?</a></h6>
-                                        <div class="topic-info">
-                                            <div>
-                                                <img src="/img/forum/topic-user-outline.svg" alt="">
-                                                <span>Zain Siphron</span>
-                                            </div>
-                                            <div>
-                                                <img src="/img/forum/topic-calendar-outline.png" alt="">
-                                                <span>Apr 15, 2021</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
+                                
+                                
                             </div>
                         </div>
 
