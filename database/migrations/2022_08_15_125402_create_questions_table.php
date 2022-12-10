@@ -21,6 +21,7 @@ class CreateQuestionsTable extends Migration
             $table->string('tags')->nullable();
             $table->longText('description');
             $table->string('file')->nullable();
+            $table->unsignedBigInteger('view')->default(0);
             $table->timestamps();
         });
     }
