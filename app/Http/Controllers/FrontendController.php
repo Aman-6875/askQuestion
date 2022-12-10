@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\CommentHelpfulInfo;
 use App\Models\Question;
@@ -16,8 +17,19 @@ class FrontendController extends Controller
 {
     public function index()
     {
+        // dd(11);
+        $post_count = Question::count();
+        $cat_count = Category::count();
+        $user_count = User::count();
+        $popular_topics = Question::take(4)->latest()->get();
+        
+        $data['post_count'] = $post_count;
+        $data['cat_count'] = $cat_count;
+        $data['user_count'] = $user_count;
+        $data['popular_topics'] = $popular_topics;
+         
         $questions = Question::orderBy('created_at', 'desc')->paginate(20);
-        return view('frontend.pages.home')->with('questions', $questions);
+        return view('frontend.pages.home',compact('data'))->with('questions', $questions);
     }
 
     public function singleQuestion($id)
