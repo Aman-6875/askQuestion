@@ -1,11 +1,11 @@
 @extends('admin.layout')
 @section('content')
     <div class="page-title">
-        <h3>Comments</h3>
+        <h3>Users</h3>
         <div class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li><a href="/admin-dashboard">Home</a></li>
-                <li class="active">Comments</li>
+                <li class="active">Users</li>
             </ol>
         </div>
     </div>
@@ -25,41 +25,43 @@
                                     </th>
                                     <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1"
                                         colspan="1" aria-sort="ascending"
-                                        aria-label="Name: activate to sort column descending" style="width: 161px;">Is
-                                        Accepted
+                                        aria-label="Name: activate to sort column descending" style="width: 161px;">Total
+                                        Question
                                     </th>
                                     <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1"
                                         colspan="1" aria-sort="ascending"
-                                        aria-label="Name: activate to sort column descending" style="width: 161px;">Question
+                                        aria-label="Name: activate to sort column descending" style="width: 161px;">Total
+                                        Comments
                                     </th>
                                     <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1"
                                         colspan="1" aria-sort="ascending"
-                                        aria-label="Name: activate to sort column descending" style="width: 161px;">User
+                                        aria-label="Name: activate to sort column descending" style="width: 161px;">Total
+                                        Point
                                     </th>
-
                                     <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
                                         colspan="1" aria-label="Salary: activate to sort column ascending"
                                         style="width: 163px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($comments as $item)
+
+                                @forelse ($users as $item)
                                     <tr role="row" class="odd">
                                         <td class="sorting_1"><a href="javascript:void(0);"
-                                                class="editable editable-click">{{ $item->comment }}</a>
+                                                class="editable editable-click">{{ $item->name }}</a>
                                         </td>
                                         <td class="sorting_1"><a href="javascript:void(0);"
-                                                class="editable editable-click">{{ $item->is_accept ? 'Yes' : 'No' }}</a>
+                                                class="editable editable-click">{{ count($item->questions) }}</a>
                                         </td>
                                         <td class="sorting_1"><a href="javascript:void(0);"
-                                                class="editable editable-click">{{ $item->question->title }}</a>
+                                                class="editable editable-click">{{ count($item->comments) }}</a>
                                         </td>
                                         <td class="sorting_1"><a href="javascript:void(0);"
-                                                class="editable editable-click">{{ $item->user->name }}</a>
+                                                class="editable editable-click">{{ $item->points }}</a>
                                         </td>
                                         <td>
                                             <a type="button" class="btn btn-danger m-b-sm"
-                                                href="{{ route('comment.delete', $item->id) }}"
+                                                href="{{ route('user.delete', $item->id) }}"
                                                 class="editable editable-click">Delete</a>
                                         </td>
                                     </tr>

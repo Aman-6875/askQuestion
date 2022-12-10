@@ -55,3 +55,6 @@ Route::get('category-delete/{id}', [CategoryController::class, 'destroy'])->name
 Route::get('all-comments', [AdminController::class, 'allComments'])->name('comments.index');
 Route::get('all-questions', [AdminController::class, 'allQuestions'])->name('questions.index');
 Route::get('delete-question/{id}', [AdminController::class, 'deleteQuestion'])->name('question.delete');
+Route::get('delete-comment/{id}', [AdminController::class, 'deleteComment'])->name('comment.delete');
+Route::get('all-users', [AdminController::class, 'allUsers'])->name('users.index');
+Route::get('delete-user/{id}', [AdminController::class, 'deleteUser'])->name('user.delete');
