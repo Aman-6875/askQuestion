@@ -129,7 +129,7 @@
                                 </div>
                                 <div class="post-info">
                                     <div class="author">
-                                        <img src="/img/user-circle-alt.svg" alt="icon">Zain Siphron
+                                        <img src="/img/user-circle-alt.svg" alt="icon">{{$item->user->name}}
                                     </div>
                                    
                                 </div>
@@ -139,14 +139,14 @@
                             </div>
                             <div class="post-reach">
                                 <div class="post-view">
-                                    <img src="/img/forum/eye-outline.svg" alt="icon">591 Views
+                                    <img src="/img/forum/eye-outline.svg" alt="icon">{{ $item->view }} Views
                                 </div>
-                                <div class="post-like">
+                                {{-- <div class="post-like">
                                     <img src="/img/forum/thumbs-up-outline.svg" alt="icon">250 Likes
                                 </div>
                                 <div class="post-comment">
                                     <img src="/img/forum/chatbubbles-outline.svg" alt="icon">155 Replies
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         @endforeach
@@ -218,51 +218,22 @@
                                 <h5>Most Helpful Users</h5>
                             </div>
                             <div class="widget-content">
+                                @foreach ($data['top_users'] as $item)
                                 <div class="single-user">
                                     <div class="user-img active">
-                                        <img src="/img/forum/helpful-user/most-h-user-1.png" alt="img">
+                                        <img src="/img/forum/helpful-user/most-h-user-{{$loop->index+1}}.png" alt="img">
                                     </div>
                                     <div class="user-info">
-                                        <h6><a href="forum-profile.html">Zain Siphron</a></h6>
-                                        <span>1000 points</span>
-                                    </div>
-                                    <img class="img-fluid ms-auto" src="/img/forum/helpful-user/first.png"
-                                        alt="">
+                                        <h6><a href="#">{{ $item->name }}</a></h6>
+                                        <span>{{ $item->points }} points</span>
+                                    </div> 
                                 </div>
-                                <div class="single-user">
-                                    <div class="user-img">
-                                        <img src="/img/forum/helpful-user/most-h-user-2.png" alt="img">
-                                    </div>
-                                    <div class="user-info">
-                                        <h6><a href="forum-profile.html">Corey Saris</a></h6>
-                                        <span>900 points</span>
-                                    </div>
-                                    <img class="img-fluid ms-auto" src="/img/forum/helpful-user/second.png"
-                                        alt="">
-                                </div>
-                                <div class="single-user">
-                                    <div class="user-img">
-                                        <img src="/img/forum/helpful-user/most-h-user-3.png" alt="img">
-                                    </div>
-                                    <div class="user-info">
-                                        <h6><a href="forum-profile.html">Kianna Curtis</a></h6>
-                                        <span>850 points</span>
-                                    </div>
-                                    <img class="img-fluid ms-auto" src="/img/forum/helpful-user/third.png"
-                                        alt="">
-                                </div>
-                                <div class="single-user">
-                                    <div class="user-img">
-                                        <img src="/img/forum/helpful-user/most-h-user-4.png" alt="img">
-                                    </div>
-                                    <div class="user-info">
-                                        <h6><a href="forum-profile.html">Jaxson Dorwart</a></h6>
-                                        <span>750 points</span>
-                                    </div>
-                                </div>
+                                @endforeach
+                               
+                               
                             </div>
                         </div>
-                        <div class="single-widget-box tag-widget mt-40">
+                        {{-- <div class="single-widget-box tag-widget mt-40">
                             <div class="widget-header">
                                 <img src="/img/tags-icon.png" alt="icon">
                                 <h5>Tags</h5>
@@ -280,7 +251,7 @@
                                     <li> <a class="tag-ecmrc" href="#">ecommerce</a> </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
