@@ -22,11 +22,13 @@ class FrontendController extends Controller
         $cat_count = Category::count();
         $user_count = User::count();
         $popular_topics = Question::take(4)->latest()->get();
+        $top_users = User::take(4)->orderBy('points','desc')->get();
         
         $data['post_count'] = $post_count;
         $data['cat_count'] = $cat_count;
         $data['user_count'] = $user_count;
         $data['popular_topics'] = $popular_topics;
+        $data['top_users'] = $top_users;
          
         $questions = Question::orderBy('created_at', 'desc')->paginate(20);
         return view('frontend.pages.home',compact('data'))->with('questions', $questions);
@@ -38,6 +40,7 @@ class FrontendController extends Controller
         $best_comment_doesnt_exist = Comment::where('question_id', $question->id)->where('is_accept', 1)->doesntExist();
         $accepted_solution = Comment::where('question_id', $question->id)->where('is_accept', 1)->first();
         $question_too_count = QuestionTooInfo::where('question_id', $id)->count();
+        Question::where('id', $id)->increment('view');
         return view('frontend.pages.question_details', compact('best_comment_doesnt_exist', 'accepted_solution', 'question_too_count'))->with('question', $question);
     }
     public function questionForm()
