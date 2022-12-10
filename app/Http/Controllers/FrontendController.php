@@ -35,10 +35,10 @@ class FrontendController extends Controller
     public function singleQuestion($id)
     {
         $question = Question::where('id', $id)->with('comments')->first();
-        $best_comment_doesnt_exist = Comment::where('question_id',$question->id)->where('is_accept',1)->doesntExist();
-        $accepted_solution = Comment::where('question_id',$question->id)->where('is_accept',1)->first();
-        $question_too_count = QuestionTooInfo::where('question_id',$id)->count();
-        return view('frontend.pages.question_details',compact('best_comment_doesnt_exist','accepted_solution','question_too_count'))->with('question', $question);
+        $best_comment_doesnt_exist = Comment::where('question_id', $question->id)->where('is_accept', 1)->doesntExist();
+        $accepted_solution = Comment::where('question_id', $question->id)->where('is_accept', 1)->first();
+        $question_too_count = QuestionTooInfo::where('question_id', $id)->count();
+        return view('frontend.pages.question_details', compact('best_comment_doesnt_exist', 'accepted_solution', 'question_too_count'))->with('question', $question);
     }
     public function questionForm()
     {
@@ -47,8 +47,8 @@ class FrontendController extends Controller
     public function userProfile()
     {
         $user_id = Auth::user()->id;
-        $questions_count = Question::where('user_id',$user_id)->count();
-        return view('frontend.pages.user_profile',compact('questions_count'));
+        $questions_count = Question::where('user_id', $user_id)->count();
+        return view('frontend.pages.user_profile', compact('questions_count'));
     }
 
     public function editProfile()
@@ -61,10 +61,10 @@ class FrontendController extends Controller
     {
         // return $request->all();
         unset($request['_token']);
-
+        //he;;p
         if ($request->hasFile('file')) {
             $image = $request->file('file');
-            $image_name = time() . '.' . 'file' . $image->getClientOriginalExtension();
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images/profile');
             $image->move($destinationPath, $image_name);
             $request['image'] = $image_name;
@@ -73,6 +73,7 @@ class FrontendController extends Controller
 
             unset($request['password']);
             unset($request['file']);
+
             // dd($request->all());
             $userData = [
                 'name' => $request->name,
@@ -84,7 +85,7 @@ class FrontendController extends Controller
                 UserMeta::where('user_id', Auth::user()->id)->update($request->except(['name', 'email', 'file']));
             } else {
                 $request['user_id'] = Auth::user()->id;
-                UserMeta::create($request->except(['name', 'email']));
+                UserMeta::create($request->except(['name', 'email', 'file']));
             }
         } else {
             unset($request['file']);
@@ -160,30 +161,32 @@ class FrontendController extends Controller
     public function userPosts()
     {
         $user_id = Auth::user()->id;
-        $questions = Question::where('user_id',$user_id)->get();
-        return view('frontend.pages.user_posts',compact('questions'));
+        $questions = Question::where('user_id', $user_id)->get();
+        return view('frontend.pages.user_posts', compact('questions'));
     }
 
 
 
-    public function questionEdit($id){
+    public function questionEdit($id)
+    {
 
         $question = Question::findOrFail($id);
 
         if ($question) {
-            return view('frontend.pages.edit_question',compact('question'));
+            return view('frontend.pages.edit_question', compact('question'));
         }
     }
 
-    public function questionUpdate(Request $request, $id){
+    public function questionUpdate(Request $request, $id)
+    {
 
-          
+
         if ($request->hasFile('file')) {
             $image = $request->file('file');
             $image_name = time() . '.' . 'file' . $image->getClientOriginalName();
             $destinationPath = public_path('/images/questions/');
             $image->move($destinationPath, $image_name);
-            $request['image'] = "/images/questions/".$image_name;
+            $request['image'] = "/images/questions/" . $image_name;
         }
 
 
@@ -206,14 +209,15 @@ class FrontendController extends Controller
             ];
         }
 
-        Question::where('id',$id)->update($data); 
+        Question::where('id', $id)->update($data);
         return redirect()->back();
     }
 
 
 
-    
-    public function questionDelete($id){
+
+    public function questionDelete($id)
+    {
 
         $question = Question::findOrFail($id);
 
@@ -225,60 +229,57 @@ class FrontendController extends Controller
 
 
 
-    public function questionBestAnswer($cid,$qid){
-        
-       $best_comment_doesnt_exist = Comment::where('question_id',$qid)->where('is_accept',1)->doesntExist();
+    public function questionBestAnswer($cid, $qid)
+    {
 
-      if ($best_comment_doesnt_exist) {
-         $comment = Comment::findOrFail($cid)->first();
-         $comment->update(['is_accept' => 1]);
-         User::where('id', $comment->user_id)->increment('points',5);
-         return redirect()->back();
-      } else {
+        $best_comment_doesnt_exist = Comment::where('question_id', $qid)->where('is_accept', 1)->doesntExist();
 
-      }
-      
+        if ($best_comment_doesnt_exist) {
+            $comment = Comment::findOrFail($cid)->first();
+            $comment->update(['is_accept' => 1]);
+            User::where('id', $comment->user_id)->increment('points', 5);
+            return redirect()->back();
+        } else {
+        }
     }
 
 
-    public function questionHelpful($cid,$qid){  
-  
-       $checking_exist_helpful = CommentHelpfulInfo::where('comment_id',$cid)->where('question_id',$qid)->exists(); 
-      if ($checking_exist_helpful == false) { 
-        
-        CommentHelpfulInfo::create([
-            'user_id' => Auth::user()->id,
-            'question_id' => $qid,
-            'comment_id' => $cid,
-        ]);
-         User::where('id', Auth::user()->id)->increment('points');
-         return redirect()->back();
-      } else {
-        return redirect()->back()->with('message','you already voted as helpful');
-      }
-      
+    public function questionHelpful($cid, $qid)
+    {
+
+        $checking_exist_helpful = CommentHelpfulInfo::where('comment_id', $cid)->where('question_id', $qid)->exists();
+        if ($checking_exist_helpful == false) {
+
+            CommentHelpfulInfo::create([
+                'user_id' => Auth::user()->id,
+                'question_id' => $qid,
+                'comment_id' => $cid,
+            ]);
+            User::where('id', Auth::user()->id)->increment('points');
+            return redirect()->back();
+        } else {
+            return redirect()->back()->with('message', 'you already voted as helpful');
+        }
     }
 
 
-    public function questionToo($qid){  
-       
-       $checking_exist_too = QuestionTooInfo::where('question_id',$qid)->where('user_id',Auth::user()->id)->exists(); 
-     
-      if ($checking_exist_too == false) { 
-        
-        QuestionTooInfo::create([
-            'user_id' => Auth::user()->id,
-            'question_id' => $qid
-        ]);
+    public function questionToo($qid)
+    {
 
-        $question_user_id = Question::where('id',$qid)->pluck('user_id')->first(); 
-         User::where('id', $question_user_id)->increment('points',2);
-         return redirect()->back();
-      } else {
-        return redirect()->back()->with('message','you already voted');
-      }
-      
+        $checking_exist_too = QuestionTooInfo::where('question_id', $qid)->where('user_id', Auth::user()->id)->exists();
+
+        if ($checking_exist_too == false) {
+
+            QuestionTooInfo::create([
+                'user_id' => Auth::user()->id,
+                'question_id' => $qid
+            ]);
+
+            $question_user_id = Question::where('id', $qid)->pluck('user_id')->first();
+            User::where('id', $question_user_id)->increment('points', 2);
+            return redirect()->back();
+        } else {
+            return redirect()->back()->with('message', 'you already voted');
+        }
     }
-
-
 }

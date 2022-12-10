@@ -42,4 +42,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserMeta::class);
     }
+    public function questions()
+    {
+        return $this->hasMany(Question::class, 'user_id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id');
+    }
 }
