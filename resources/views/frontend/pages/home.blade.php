@@ -6,48 +6,18 @@
         <div class="container">
             <h2 class="section-title-h2 text-center mb-60 text-center wow fadeinUp">Amas Categories</h2>
             <div class="row gy-lg-0 gy-4 justify-content-center">
-                <div class="col-custom wow fadeInUp">
-                    <a href="#">
-                        <div class="single-category-widget">
-                            <img src="/img/home_three/forum-catagory-01.svg" alt="icon">
-                            <h5>Getting started</h5>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-custom wow fadeInUp" data-wow-delay="0.3s">
-                    <a href="#">
-                        <div class="single-category-widget">
-                            <img src="/img/home_three/forum-catagory-02.svg" alt="icon">
-                            <h5>Announcements</h5>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-custom wow fadeInUp" data-wow-delay="0.5s">
-                    <a href="#">
-                        <div class="single-category-widget">
-                            <img src="/img/home_three/forum-catagory-03.svg" alt="icon">
-                            <h5>Authors</h5>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-custom wow fadeInUp" data-wow-delay="0.7s">
-                    <a href="#">
-                        <div class="single-category-widget">
-                            <img src="/img/home_three/forum-catagory-04.svg" alt="icon">
-                            <h5>Customers</h5>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-custom wow fadeInUp" data-wow-delay="0.9s">
-                    <a href="#">
-                        <div class="single-category-widget">
-                            <img src="/img/home_three/forum-catagory-05.svg" alt="icon">
-                            <h5>Technology</h5>
-                        </div>
-                    </a>
-                </div>
 
-
+                @foreach ($data['categories'] as $item)
+                    <div class="col-custom wow fadeInUp">
+                        <a href="{{ route('category.questions',$item->id) }}">
+                            <div class="single-category-widget">
+                                {{-- <img src="/img/home_three/forum-catagory-01.svg" alt="icon"> --}}
+                                <h5>{{  $item->name }}</h5>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+                
             </div>
 
         </div>

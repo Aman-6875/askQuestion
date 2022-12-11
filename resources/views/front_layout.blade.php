@@ -45,22 +45,11 @@
                         <h1 class="banner-title-h1 mb-4">Need some help with Ama?</h1>
                         <form action="#" class="header_search_form-2 mx-auto">
                             <div class="header_search_form_info">
-                                <div class="form-group">
-
-                                    <select class="search-expand-types custom-select" name="post_type"
-                                        id="search_post_type">
-                                        <option value="">All Docs </option>
-                                        <option value="manual_kb">Knowledge Base</option>
-                                        <option value="manual_documentation">Documentation</option>
-                                        <option value="manual_faq">FAQs</option>
-                                        <option value="ama">Ama</option>
-                                        <option value="manual_portfolio">Portfolio</option>
-                                        <option value="product">Products</option>
-                                    </select>
+                                <div class="form-group">        
                                     <div class="input-wrapper">
                                         <i class="icon_search"></i>
-                                        <input type='search' id="searchbox" autocomplete="off" name="search"
-                                            placeholder="Search the Doc" />
+                                        <input type='search' id="searchbox" autocomplete="off" name="q"
+                                            placeholder="Search the Doc" value="{{old('q')}}" />
 
                                         <div class="header_search_form_panel">
                                             <ul class="list-unstyled">
@@ -99,7 +88,7 @@
                                 </div>
 
                             </div>
-                            <div class="header_search_keyword search-white mt-3">
+                            {{-- <div class="header_search_keyword search-white mt-3">
                                 <span class="header-search-form__keywords-label">Popular topics:</span>
                                 <ul class="list-unstyled">
                                     <li class="wow fadeInUp" data-wow-delay="0.2s"><a href="#">Forums</a>,
@@ -110,7 +99,7 @@
                                             href="#">Introduction</a>,</li>
                                     <li class="wow fadeInUp" data-wow-delay="0.4s"><a href="#">Payment</a></li>
                                 </ul>
-                            </div>
+                            </div> --}}
                         </form>
 
 

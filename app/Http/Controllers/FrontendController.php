@@ -15,22 +15,27 @@ use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // dd(11);
+         
         $post_count = Question::count();
         $cat_count = Category::count();
         $user_count = User::count();
         $popular_topics = Question::take(4)->latest()->get();
         $top_users = User::take(4)->orderBy('points','desc')->get();
-        
+        $data['categories'] = Category::get();
         $data['post_count'] = $post_count;
         $data['cat_count'] = $cat_count;
         $data['user_count'] = $user_count;
         $data['popular_topics'] = $popular_topics;
         $data['top_users'] = $top_users;
-         
-        $questions = Question::orderBy('created_at', 'desc')->paginate(20);
+        
+        if($request->has('q')){
+            $questions = Question::where('title', 'LIKE', "%{$request->q}%")  
+            ->paginate(10); 
+        }else{
+            $questions = Question::orderBy('created_at', 'desc')->paginate(20);
+        }
         return view('frontend.pages.home',compact('data'))->with('questions', $questions);
     }
 
@@ -284,5 +289,16 @@ class FrontendController extends Controller
         } else {
             return redirect()->back()->with('message', 'you already voted');
         }
+    }
+
+    public function categoryQuestions(Request $request,$id){
+        if($request->has('q')){
+            $questions = Question::where('category_id',$id)->where('title', 'LIKE', "%{$request->q}%")  
+            ->paginate(10); 
+        }else{
+            $questions = Question::where('category_id',$id)->get();
+        }
+        $data['categories'] = Category::get();
+        return view('frontend.pages.category-questions', compact('questions','data'));
     }
 }

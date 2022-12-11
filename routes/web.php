@@ -25,6 +25,7 @@ Route::get('/sign-up', [AuthController::class, 'registerForm']);
 Route::get('/', [FrontendController::class, 'index']);
 Route::post('/post-register', [AuthController::class, 'postRegister'])->name('auth.signup');
 Route::get('/question-details/{id}', [FrontendController::class, 'singleQuestion'])->name('question.details');
+Route::get('/category-questions/{id}', [FrontendController::class, 'categoryQuestions'])->name('category.questions');
 Route::post('/post-login', [AuthController::class, 'authenticate'])->name('auth.signin');
 
 Route::middleware('auth')->group(function () {
