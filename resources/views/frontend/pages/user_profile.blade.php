@@ -42,8 +42,8 @@
 
 
                         <ul class="list-unstyled mb-4">
-                            <li>Web Developer</li>
-                            <li>Boston, MA, United States</li>
+                            <li>{{auth()->user()->userMeta->proffession}}</li>
+                            <li>{{auth()->user()->userMeta->location}}</li>
                         </ul>
                     </div>
                 </div>
@@ -71,26 +71,20 @@
                             <div class="row mt-3">
                                 <div class="col-md-4">
                                     <h6><img src="/img/user_details/calendar.png" alt=""> Age</h6>
-                                    <p>25 Years</p>
+                                    <p>{{auth()->user()->userMeta->age}} Years</p>
                                 </div>
                                 <div class="col-md-4">
                                     <h6><img src="/img/user_details/badge.png" alt=""> Experience</h6>
-                                    <p>5 Years</p>
+                                    <p>{{auth()->user()->userMeta->experience}} Years</p>
                                 </div>
                                 <div class="col-md-4">
                                     <h6><img src="/img/user_details/phone.png" alt=""> Phone</h6>
-                                    <p> <a href="tel:12345679">+1 (202) 456 789</a> </p>
+                                    <p> <a href="tel:{{auth()->user()->userMeta->phone}}">{{auth()->user()->userMeta->phone}}</a> </p>
                                 </div>
                                 <div class="col-md-4">
                                     <h6><img src="/img/user_details/location.png" alt=""> Location</h6>
-                                    <p>Boston, MA, United States</p>
-                                </div>
-                                <div class="col-md-4">
-                                    <h6><img src="/img/user_details/envelope.png" alt=""> Email</h6>
-                                    <p><a href="mailto:gustavo@ama.com">gustavo@ama.com</a></p>
-                                </div>
-
-
+                                    <p>{{auth()->user()->userMeta->location}}</p>
+                                </div> 
                             </div>
                         </div>
                     </div>
