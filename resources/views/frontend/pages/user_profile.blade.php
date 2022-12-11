@@ -65,12 +65,7 @@
                 <div class="col-lg-12 col-xl-10">
                     <div class="user-details-widget">
                         <div class="widget-body">
-                            <p class="user-text">I am a Graphic Designer based in New York, specializing in User
-                                Interface Design and Development. I build clean, appealing, and functional
-                                interfaces which comply with the latest web standards. But that’s just a part of it.
-                                Design is my life. It’s my five-star spa. It’s my roller-coaster. It’s something I
-                                do before going to bed, and something I can’t wait to do in the mornings. Without
-                                it, my world would be black and white.”</p>
+                            <p class="user-text">{{auth()->user()->userMeta->bio}}</p>
 
                             <h4>Basic Information</h4>
                             <div class="row mt-3">

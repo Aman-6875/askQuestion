@@ -156,7 +156,7 @@
                         <div class="single-widget-box populer-topics mt-40">
                             <div class="widget-header">
                                 <img src="/img/speech-bubble.png" alt="icon">
-                                <h5>Popular Topics</h5>
+                                <h5>Recent Topics</h5>
                             </div>
                             <div class="widget-content">
                                 @foreach ($data['popular_topics'] as $item)

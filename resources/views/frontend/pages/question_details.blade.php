@@ -42,6 +42,7 @@
                     </div>
 
                     <!-- Forum post content -->
+                    
                     <div class="q-title">
                         <span class="question-icon" title="Question">Q:</span>
                         <h1>{{$question->title}}</h1>
