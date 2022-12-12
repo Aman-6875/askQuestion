@@ -195,8 +195,9 @@
                                 @foreach ($data['top_users'] as $item)
                                     <div class="single-user">
                                         <div class="user-img active">
-                                            <img src="/img/forum/helpful-user/most-h-user-{{ $loop->index + 1 }}.png"
-                                                alt="img">
+                                            <img src="/images/profile/{{ $item->userMeta->image ?? null }}" alt="img"
+                                                style="height: 50px; width: 50px;">
+
                                         </div>
                                         <div class="user-info">
                                             <h6><a href="#">{{ $item->name }}</a></h6>
