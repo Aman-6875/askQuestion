@@ -48,14 +48,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/question-best-answer/{cid}/{qid}', [FrontendController::class, 'questionBestAnswer'])->name('question_best.answer');
     Route::get('/question-helpful/{cid}/{qid}', [FrontendController::class, 'questionHelpful'])->name('question.helpful');
     Route::get('/question-too/{qid}', [FrontendController::class, 'questionToo'])->name('question.too');
-});
 
-Route::get('admin-dashboard', [AdminController::class, 'index']);
-Route::resource('category', CategoryController::class);
-Route::get('category-delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
-Route::get('all-comments', [AdminController::class, 'allComments'])->name('comments.index');
-Route::get('all-questions', [AdminController::class, 'allQuestions'])->name('questions.index');
-Route::get('delete-question/{id}', [AdminController::class, 'deleteQuestion'])->name('question.delete');
-Route::get('delete-comment/{id}', [AdminController::class, 'deleteComment'])->name('comment.delete');
-Route::get('all-users', [AdminController::class, 'allUsers'])->name('users.index');
-Route::get('delete-user/{id}', [AdminController::class, 'deleteUser'])->name('user.delete');
+    //admin panel
+    Route::get('admin-dashboard', [AdminController::class, 'index']);
+    Route::resource('category', CategoryController::class);
+    Route::get('category-delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
+    Route::get('all-comments', [AdminController::class, 'allComments'])->name('comments.index');
+    Route::get('all-questions', [AdminController::class, 'allQuestions'])->name('questions.index');
+    Route::get('delete-question/{id}', [AdminController::class, 'deleteQuestion'])->name('question.delete');
+    Route::get('delete-comment/{id}', [AdminController::class, 'deleteComment'])->name('comment.delete');
+    Route::get('all-users', [AdminController::class, 'allUsers'])->name('users.index');
+    Route::get('delete-user/{id}', [AdminController::class, 'deleteUser'])->name('user.delete');
+});

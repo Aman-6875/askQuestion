@@ -9,15 +9,17 @@
 
                 @foreach ($data['categories'] as $item)
                     <div class="col-custom wow fadeInUp">
-                        <a href="{{ route('category.questions',$item->id) }}">
+                        <a href="{{ route('category.questions', $item->id) }}">
+
                             <div class="single-category-widget">
                                 {{-- <img src="/img/home_three/forum-catagory-01.svg" alt="icon"> --}}
-                                <h5>{{  $item->name }}</h5>
+                                <h5>{{ $item->name }}</h5>
                             </div>
                         </a>
                     </div>
+                    <br><br>
                 @endforeach
-                
+
             </div>
 
         </div>
@@ -90,39 +92,39 @@
                             </div>
                         </div> --}}
                         @foreach ($questions as $item)
-                        <div class="single-forum-post-widget wow fadeInUp">
-                            <div class="post-content">
-                                <div class="post-title">
-                                    <h6><a href="/question-details/{{$item->id}}">{{$item->title}}</a>
-                                        <span><i class="icon_check_alt2"></i></span>
-                                    </h6>
-                                </div>
-                                <div class="post-info">
-                                    <div class="author">
-                                        <img src="/img/user-circle-alt.svg" alt="icon">{{$item->user->name}}
+                            <div class="single-forum-post-widget wow fadeInUp">
+                                <div class="post-content">
+                                    <div class="post-title">
+                                        <h6><a href="/question-details/{{ $item->id }}">{{ $item->title }}</a>
+                                            <span><i class="icon_check_alt2"></i></span>
+                                        </h6>
                                     </div>
-                                   
+                                    <div class="post-info">
+                                        <div class="author">
+                                            <img src="/img/user-circle-alt.svg" alt="icon">{{ $item->user->name }}
+                                        </div>
+
+                                    </div>
+                                    <div class="post-tags">
+                                        <div class="single-tag tag-jq">{{ $item->tags }}</div>
+                                    </div>
                                 </div>
-                                <div class="post-tags">
-                                    <div class="single-tag tag-jq">{{$item->tags}}</div>
-                                </div>
-                            </div>
-                            <div class="post-reach">
-                                <div class="post-view">
-                                    <img src="/img/forum/eye-outline.svg" alt="icon">{{ $item->view }} Views
-                                </div>
-                                {{-- <div class="post-like">
+                                <div class="post-reach">
+                                    <div class="post-view">
+                                        <img src="/img/forum/eye-outline.svg" alt="icon">{{ $item->view }} Views
+                                    </div>
+                                    {{-- <div class="post-like">
                                     <img src="/img/forum/thumbs-up-outline.svg" alt="icon">250 Likes
                                 </div>
                                 <div class="post-comment">
                                     <img src="/img/forum/chatbubbles-outline.svg" alt="icon">155 Replies
                                 </div> --}}
+                                </div>
                             </div>
-                        </div>
                         @endforeach
-                        
+
                         {{ $questions->links('vendor.pagination.custom_paginate') }}
-                        
+
                     </div>
                 </div>
 
@@ -160,25 +162,27 @@
                             </div>
                             <div class="widget-content">
                                 @foreach ($data['popular_topics'] as $item)
-                                <div class="single-topic">
-                                    <span class="topic-no">{{  $loop->index + 1 }}</span>
-                                    <div class="topic-content">
-                                        <h6><a href="{{ route('question.details',$item->id) }}">{{  $item->title }}</a></h6>
-                                        <div class="topic-info">
-                                            <div>
-                                                <img src="/img/forum/topic-user-outline.svg" alt="">
-                                                <span>{{$item->user->name}}</span>
-                                            </div>
-                                            <div>
-                                                <img src="/img/forum/topic-calendar-outline.png" alt="">
-                                                <span>{{ $item->created_at->diffForHumans() }}</span>
+                                    <div class="single-topic">
+                                        <span class="topic-no">{{ $loop->index + 1 }}</span>
+                                        <div class="topic-content">
+                                            <h6><a
+                                                    href="{{ route('question.details', $item->id) }}">{{ $item->title }}</a>
+                                            </h6>
+                                            <div class="topic-info">
+                                                <div>
+                                                    <img src="/img/forum/topic-user-outline.svg" alt="">
+                                                    <span>{{ $item->user->name }}</span>
+                                                </div>
+                                                <div>
+                                                    <img src="/img/forum/topic-calendar-outline.png" alt="">
+                                                    <span>{{ $item->created_at->diffForHumans() }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
-                                
-                                
+
+
                             </div>
                         </div>
 
@@ -189,18 +193,20 @@
                             </div>
                             <div class="widget-content">
                                 @foreach ($data['top_users'] as $item)
-                                <div class="single-user">
-                                    <div class="user-img active">
-                                        <img src="/img/forum/helpful-user/most-h-user-{{$loop->index+1}}.png" alt="img">
+                                    <div class="single-user">
+                                        <div class="user-img active">
+                                            <img src="/images/profile/{{ $item->userMeta->image ?? null }}" alt="img"
+                                                style="height: 50px; width: 50px;">
+
+                                        </div>
+                                        <div class="user-info">
+                                            <h6><a href="#">{{ $item->name }}</a></h6>
+                                            <span>{{ $item->points }} points</span>
+                                        </div>
                                     </div>
-                                    <div class="user-info">
-                                        <h6><a href="#">{{ $item->name }}</a></h6>
-                                        <span>{{ $item->points }} points</span>
-                                    </div> 
-                                </div>
                                 @endforeach
-                               
-                               
+
+
                             </div>
                         </div>
                         {{-- <div class="single-widget-box tag-widget mt-40">
@@ -234,16 +240,13 @@
     <section class="call-to-action cta-bg-3">
         <div class="bg-shapes">
             <div class="shape">
-                <img data-parallax='{"x": -50, "y": 0, "rotateZ":0}' src="/img/home_three/cta-shape-1.png"
-                    alt="">
+                <img data-parallax='{"x": -50, "y": 0, "rotateZ":0}' src="/img/home_three/cta-shape-1.png" alt="">
             </div>
             <div class="shape">
-                <img data-parallax='{"x": 100, "y": 0, "rotateZ":0}' src="/img/home_three/cta-shape-2.png"
-                    alt="">
+                <img data-parallax='{"x": 100, "y": 0, "rotateZ":0}' src="/img/home_three/cta-shape-2.png" alt="">
             </div>
             <div class="shape">
-                <img data-parallax='{"x": 100, "y": 0, "rotateZ":0}' src="/img/home_three/cta-shape-3.png"
-                    alt="">
+                <img data-parallax='{"x": 100, "y": 0, "rotateZ":0}' src="/img/home_three/cta-shape-3.png" alt="">
             </div>
         </div>
         <div class="container">

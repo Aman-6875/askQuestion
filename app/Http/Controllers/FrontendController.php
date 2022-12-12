@@ -17,31 +17,31 @@ class FrontendController extends Controller
 {
     public function index(Request $request)
     {
-         
+
         $post_count = Question::count();
         $cat_count = Category::count();
         $user_count = User::count();
         $popular_topics = Question::take(4)->latest()->get();
-        $top_users = User::take(4)->orderBy('points','desc')->get();
+        $top_users = User::take(4)->with('userMeta')->orderBy('points', 'desc')->get();
         $data['categories'] = Category::get();
         $data['post_count'] = $post_count;
         $data['cat_count'] = $cat_count;
         $data['user_count'] = $user_count;
         $data['popular_topics'] = $popular_topics;
         $data['top_users'] = $top_users;
-        
-        if($request->has('q')){
-            $questions = Question::where('title', 'LIKE', "%{$request->q}%")  
-            ->paginate(10); 
-        }else{
+
+        if ($request->has('q')) {
+            $questions = Question::where('title', 'LIKE', "%{$request->q}%")
+                ->paginate(10);
+        } else {
             $questions = Question::orderBy('created_at', 'desc')->paginate(20);
         }
-        return view('frontend.pages.home',compact('data'))->with('questions', $questions);
+        return view('frontend.pages.home', compact('data'))->with('questions', $questions);
     }
 
     public function singleQuestion($id)
     {
-        $question = Question::where('id', $id)->with('comments')->first();
+        $question = Question::where('id', $id)->with('comments', 'user')->first();
         $best_comment_doesnt_exist = Comment::where('question_id', $question->id)->where('is_accept', 1)->doesntExist();
         $accepted_solution = Comment::where('question_id', $question->id)->where('is_accept', 1)->first();
         $question_too_count = QuestionTooInfo::where('question_id', $id)->count();
@@ -255,7 +255,8 @@ class FrontendController extends Controller
     public function questionHelpful($cid, $qid)
     {
 
-        $checking_exist_helpful = CommentHelpfulInfo::where('comment_id', $cid)->where('question_id', $qid)->exists();
+        $checking_exist_helpful = CommentHelpfulInfo::where('comment_id', $cid)->where('question_id', $qid)->where('user_id', Auth::user()->id)->exists();
+        $user_id = Comment::where('id', $cid)->pluck('user_id')->first();
         if ($checking_exist_helpful == false) {
 
             CommentHelpfulInfo::create([
@@ -263,7 +264,7 @@ class FrontendController extends Controller
                 'question_id' => $qid,
                 'comment_id' => $cid,
             ]);
-            User::where('id', Auth::user()->id)->increment('points');
+            User::where('id', $user_id)->increment('points');
             return redirect()->back();
         } else {
             return redirect()->back()->with('message', 'you already voted as helpful');
@@ -291,14 +292,15 @@ class FrontendController extends Controller
         }
     }
 
-    public function categoryQuestions(Request $request,$id){
-        if($request->has('q')){
-            $questions = Question::where('category_id',$id)->where('title', 'LIKE', "%{$request->q}%")  
-            ->paginate(10); 
-        }else{
-            $questions = Question::where('category_id',$id)->get();
+    public function categoryQuestions(Request $request, $id)
+    {
+        if ($request->has('q')) {
+            $questions = Question::where('category_id', $id)->where('title', 'LIKE', "%{$request->q}%")
+                ->paginate(10);
+        } else {
+            $questions = Question::where('category_id', $id)->get();
         }
         $data['categories'] = Category::get();
-        return view('frontend.pages.category-questions', compact('questions','data'));
+        return view('frontend.pages.category-questions', compact('questions', 'data'));
     }
 }

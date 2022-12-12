@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function userMeta()
     {
-        return $this->hasOne(UserMeta::class);
+        return $this->hasOne(UserMeta::class)->withDefault();
     }
     public function questions()
     {
