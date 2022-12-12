@@ -55,6 +55,9 @@
                         <a class="wow fadeInUp" data-wow-delay="0.7s" href="#"><i class="social_twitter"></i></a>
                     </div>
                     <a class="action_btn ask_btn mt-35" href="/edit-profile">Edit Profile</a>
+                    @if (auth()->user()->is_admin == true)
+                        <a class="action_btn ask_btn mt-35" href="/admin-dashboard">Admin Pnael</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -65,7 +68,7 @@
                 <div class="col-lg-12 col-xl-10">
                     <div class="user-details-widget">
                         <div class="widget-body">
-                            <p class="user-text">{{auth()->user()->userMeta->bio}}</p>
+                            <p class="user-text">{{ auth()->user()->userMeta->bio }}</p>
 
                             <h4>Basic Information</h4>
                             <div class="row mt-3">
