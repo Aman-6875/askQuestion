@@ -111,7 +111,7 @@
                                 </div>
                                 <div>
                                     <p>Answers</p>
-                                    <h5 class="counter">9</h5>
+                                    <h5 class="counter">{{ $data['answer_count'] ?? null }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                                 </div>
                                 <div>
                                     <p>Best Answers</p>
-                                    <h5 class="counter">299</h5>
+                                    <h5 class="counter">{{ $data['best_answer_count'] ?? null }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                                 </div>
                                 <div>
                                     <p>Points</p>
-                                    <h5 class="counter">{{ auth()->user()->points }}</h5>
+                                    <h5 class="counter">{{ auth()->user()->points ?? null }}</h5>
                                 </div>
                             </div>
                         </div>

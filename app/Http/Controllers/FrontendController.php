@@ -56,7 +56,9 @@ class FrontendController extends Controller
     {
         $user_id = Auth::user()->id;
         $questions_count = Question::where('user_id', $user_id)->count();
-        return view('frontend.pages.user_profile', compact('questions_count'));
+        $data['answer_count'] = Comment::where('user_id', $user_id)->count();
+        $data['best_answer_count'] = Comment::where('user_id', $user_id)->where('is_accept',1)->count();
+        return view('frontend.pages.user_profile', compact('questions_count','data'));
     }
 
     public function editProfile()

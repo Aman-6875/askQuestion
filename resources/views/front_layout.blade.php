@@ -49,7 +49,7 @@
                                     <div class="input-wrapper">
                                         <i class="icon_search"></i>
                                         <input type='search' id="searchbox" autocomplete="off" name="q"
-                                            placeholder="Search the Doc" value="{{old('q')}}" />
+                                            placeholder="Search..." value="{{old('q')}}" />
 
                                         <div class="header_search_form_panel">
                                             <ul class="list-unstyled">
