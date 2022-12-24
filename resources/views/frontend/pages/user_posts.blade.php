@@ -23,7 +23,7 @@
                                 <td>{{$item->title}}</td>
                                 <td>{{$item->category->name}}</td>
                                 <td>{{$item->description}}</td>
-                                <td><img width="100px" height="100px" src="{{asset($item->file)}}" ></td>
+                                <td><img width="100px" height="100px" src="/images/questions/{{$item->file}}" ></td>
                                 <td>
                                     <a href="{{ route('question.details',$item->id) }}" class="btn btn-sm btn-primary">View</a>
                                     <a href="{{ route('question.edit',$item->id) }}" class="btn btn-sm btn-secondary">Edit</a>
