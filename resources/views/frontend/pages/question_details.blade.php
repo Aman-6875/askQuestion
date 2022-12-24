@@ -43,6 +43,9 @@
                         <span class="question-icon" title="Question">Q:</span>
                         <h1>{{ $question->title }}</h1>
                     </div>
+                    <div class="q-title">
+                        <img src="/images/questions/{{$question->file}}" class="img-fluid" alt="Responsive image">
+                    </div>
                     <div class="forum-post-content">
                         <div class="content">
                             <p>{{ $question->description }}</p>
@@ -54,8 +57,8 @@
                         </div>
                         <div class="action-button-container action-btns">
                             {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> --}}
-                            <a href="#" class="action_btn btn-ans ask-btn reply-btn replybutton">Reply</a>
                             @if (auth()->check())
+                            <a href="#" class="action_btn btn-ans ask-btn reply-btn replybutton">Reply</a>
                                 <a href="{{ route('question.too', $question->id) }}"
                                     class="action_btn btn-ans ask-btn too-btn">I have this question too
                                     ({{ $question_too_count }})</a>
@@ -264,9 +267,7 @@
         </div>
 
     </section>
-@endsection
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>
+    <script>
     $(function() {
 
         $('.replybutton').on('click', function() {
@@ -282,3 +283,6 @@
 
     });
 </script>
+
+@endsection
+{{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> --}}
